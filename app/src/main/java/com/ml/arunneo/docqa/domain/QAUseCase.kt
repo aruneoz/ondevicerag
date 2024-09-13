@@ -38,7 +38,7 @@ constructor(
         Log.e("APP", "Context: $jointContext")
         val inputPrompt = prompt.replace("\$CONTEXT", jointContext).replace("\$QUERY", query)
         CoroutineScope(Dispatchers.IO).launch {
-            gemmaLocalAPI.getResponse(inputPrompt)?.let { llmResponse ->
+            geminiRemoteAPI.getResponse(inputPrompt)?.let { llmResponse ->
                 onResponse(QueryResult(llmResponse, retrievedContextList))
             }
         }
