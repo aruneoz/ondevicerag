@@ -3,6 +3,8 @@ buildscript {
     dependencies {
         classpath(libs.objectbox)
     }
+
+
 }
 
 plugins {

@@ -3,7 +3,7 @@ package com.ml.arunneo.docqa.domain.llm
 import android.util.Log
 import com.google.ai.client.generativeai.GenerativeModel
 import com.google.ai.client.generativeai.type.GenerationConfig
-import com.ml.arunneo.docqa.BuildConfig
+import com.google.aiedge.rag.BuildConfig
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 

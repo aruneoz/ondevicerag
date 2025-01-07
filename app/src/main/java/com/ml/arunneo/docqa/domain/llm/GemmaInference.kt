@@ -25,7 +25,7 @@ class GemmaInference private constructor(context: Context) {
         onBufferOverflow = BufferOverflow.DROP_OLDEST
     )
     val partialResults: SharedFlow<Pair<String, Boolean>> = _partialResults.asSharedFlow()
-    //val MODEL_PATH = "/data/local/tmp/llm/gemma-2b-cpu-int8.task"
+    //val MODEL_PATH = "/data/local/tmp/llm/model.bin.gpu.bin"
     init {
         if (!modelExists) {
             throw IllegalArgumentException("Model not found at path: $MODEL_PATH")
@@ -54,7 +54,7 @@ class GemmaInference private constructor(context: Context) {
     companion object {
         // NB: Make sure the filename is *unique* per model you use!
         // Weight caching is currently based on filename alone.
-        private const val MODEL_PATH = "/data/local/tmp/llm/model.bin.gpu.bin"
+        private const val MODEL_PATH = "/data/local/tmp/llm/gemma2-2b-it-gpu-int8.bin"
         private var instance: GemmaInference? = null
              fun getInstance(context: Context): GemmaInference {
             return if (instance != null) {

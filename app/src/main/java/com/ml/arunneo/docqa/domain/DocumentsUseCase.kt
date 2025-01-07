@@ -10,6 +10,8 @@ package com.ml.arunneo.docqa.domain
 import android.util.Log
 import com.ml.arunneo.docqa.data.Document
 import com.ml.arunneo.docqa.data.DocumentsDB
+import com.ml.arunneo.docqa.domain.llm.RagLocalAPI
+import com.ml.arunneo.docqa.domain.llm.RagPipeline
 import com.ml.arunneo.docqa.domain.readers.Readers
 import com.ml.arunneo.docqa.domain.splitters.WhiteSpaceSplitter
 import dev.langchain4j.data.document.parser.apache.pdfbox.ApachePdfBoxDocumentParser
@@ -28,7 +30,7 @@ import dev.langchain4j.data.document.Document as LangchainDocument
 @Singleton
 class DocumentsUseCase
 @Inject
-constructor(private val chunksUseCase: ChunksUseCase, private val documentsDB: DocumentsDB) {
+constructor(private val chunksUseCase: ChunksUseCase, private val documentsDB: DocumentsDB, private val ragLocalAPI: RagLocalAPI,) {
 
     suspend fun addDocument(
         inputStream: InputStream,
@@ -52,10 +54,13 @@ constructor(private val chunksUseCase: ChunksUseCase, private val documentsDB: D
             val chunks = WhiteSpaceSplitter.createChunks(text, chunkSize = 500, chunkOverlap = 50)
             setProgressDialogText("Adding chunks to database...")
             val size = chunks.size
-            chunks.forEachIndexed { index, s ->
-                setProgressDialogText("Added ${index+1}/${size} chunk(s) to database...")
-                chunksUseCase.addChunk(newDocId, fileName, s)
-            }
+            setProgressDialogText("Added chunk(s) of size  ${size} to database...")
+            ragLocalAPI.addChunk(chunks)
+
+//            chunks.forEachIndexed { index, s ->
+//                setProgressDialogText("Added ${index+1}/${size} chunk(s) to database...")
+//                chunksUseCase.addChunk(newDocId, fileName, s)
+//            }
         }
 
     suspend fun addDocumentLangChain(

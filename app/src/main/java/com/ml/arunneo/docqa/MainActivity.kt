@@ -9,6 +9,8 @@ import androidx.compose.animation.fadeOut
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import com.ml.arunneo.docqa.domain.llm.RagLocalAPI
+import com.ml.arunneo.docqa.domain.llm.RagPipeline
 import com.ml.arunneo.docqa.ui.screens.ChatScreen
 import com.ml.arunneo.docqa.ui.screens.DocsScreen
 import com.tom_roush.pdfbox.android.PDFBoxResourceLoader
@@ -20,6 +22,8 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         PDFBoxResourceLoader.init(getApplicationContext());
+        RagPipeline.getInstance(application.applicationContext)
+
         enableEdgeToEdge()
         setContent {
             val navHostController = rememberNavController()

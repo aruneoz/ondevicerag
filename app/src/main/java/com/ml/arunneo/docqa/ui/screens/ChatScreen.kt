@@ -50,7 +50,7 @@ import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import com.ml.arunneo.docqa.ui.theme.DocQATheme
 import com.ml.arunneo.docqa.ui.viewmodels.ChatViewModel
-import com.ml.arunneo.docqa.R
+import com.google.aiedge.rag.R
 import dev.jeziellago.compose.markdowntext.MarkdownText
 
 @OptIn(ExperimentalMaterial3Api::class)

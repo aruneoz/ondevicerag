@@ -11,7 +11,7 @@ plugins {
 val geminiKey: String = gradleLocalProperties(rootDir, providers).getProperty("geminiKey")
 
 android {
-    namespace = "com.ml.arunneo.docqa"
+    namespace = "com.google.aiedge.rag"
     compileSdk = 34
 
     packaging {
@@ -34,6 +34,10 @@ android {
         vectorDrawables {
             useSupportLibrary = true
         }
+
+        ndk {
+            abiFilters.add("arm64-v8a")
+        }
     }
 
     buildTypes {
@@ -52,15 +56,18 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility = JavaVersion.VERSION_1_8
-        targetCompatibility = JavaVersion.VERSION_1_8
+        sourceCompatibility = JavaVersion.VERSION_21
+        targetCompatibility = JavaVersion.VERSION_21
     }
     kotlinOptions {
-        jvmTarget = "1.8"
+        jvmTarget = "21"
     }
     buildFeatures {
         compose = true
         buildConfig = true
+    }
+    composeOptions {
+        kotlinCompilerExtensionVersion = "1.5.9"
     }
     packaging {
         resources {
@@ -87,8 +94,12 @@ dependencies {
 
     // Sentence Embeddings
     // https://github.com/shubham0204/Sentence-Embeddings-Android
+    implementation("com.google.guava:guava:33.3.1-android")
+    implementation("org.jetbrains.kotlinx:kotlinx-coroutines-guava:1.9.0")
     implementation("com.github.shubham0204:Sentence-Embeddings-Android:0.0.3")
-    implementation ("com.google.mediapipe:tasks-genai:0.10.14")
+    implementation("com.google.aiedge:rag:0.0.1-alpha-1")
+    implementation("com.google.mediapipe:tasks-genai:0.10.18")
+
     // iTextPDF - for parsing PDFs
     implementation("com.itextpdf:itextpdf:5.5.13.3")
 
@@ -127,6 +138,9 @@ dependencies {
     debugImplementation(libs.androidx.ui.tooling)
     debugImplementation(libs.androidx.ui.test.manifest)
 }
+
+
+
 
 
 configurations {

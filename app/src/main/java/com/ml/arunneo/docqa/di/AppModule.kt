@@ -13,6 +13,7 @@ import com.ml.arunneo.docqa.data.DocumentsDB
 import com.ml.arunneo.docqa.domain.embeddings.SentenceEmbeddingProvider
 import com.ml.arunneo.docqa.domain.llm.GeminiRemoteAPI
 import com.ml.arunneo.docqa.domain.llm.GemmaLocalAPI
+import com.ml.arunneo.docqa.domain.llm.RagLocalAPI
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -40,11 +41,11 @@ object AppModule {
         return ChunksDB()
     }
 
-//    @Provides
-//    @Singleton
-//    fun provideChunksDB(): ChunksDBL {
-//        return ChunksDBL()
-//    }
+    @Provides
+    @Singleton
+    fun provideRagPipeline(context: Application): RagLocalAPI {
+        return RagLocalAPI(context)
+    }
 
     @Provides
     @Singleton
