@@ -95,14 +95,19 @@ constructor(private val chunksUseCase: ChunksUseCase, private val documentsDB: D
                     val size = chunks.size
                     setProgressDialogText("Going to add ${size / 500 } chunk(s) to database...")
                    // chunksUseCase.addChunk(newDocId, fileName, s.text())
-                    chunks.forEachIndexed { index, s ->
-                        setProgressDialogText("Added ${index + 1}/${size} chunk(s) to database...")
-                        chunksUseCase.addChunk(newDocId, fileName, s.text())
-                        //chunksUseCase.addChunksL(newDocId, fileName,chunks)
-                    }
+                    ragLocalAPI.addChunk(convertTextSegmentsToStrings(chunks))
+//                    chunks.forEachIndexed { index, s ->
+//                        setProgressDialogText("Added ${index + 1}/${size} chunk(s) to database...")
+//                        chunksUseCase.addChunk(newDocId, fileName, s.text())
+//                        //chunksUseCase.addChunksL(newDocId, fileName,chunks)
+//                    }
                 }
             }
         }
+
+    fun convertTextSegmentsToStrings(segments: List<TextSegment>): List<String> {
+        return segments.map { it.text() }
+    }
 
 
     fun getAllDocuments(): Flow<List<Document>> {

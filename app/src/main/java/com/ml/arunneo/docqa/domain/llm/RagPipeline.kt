@@ -114,6 +114,9 @@ class RagPipeline constructor(application: Context) {
     /** Stores input texts in the semantic text memory. */
     fun memorize(facts: List<String>) {
         config.semanticMemory.getOrNull()?.recordBatchedMemoryItems(ImmutableList.copyOf(facts))
+        print("*******Facts**********")
+        print(facts.toString())
+        print("*******Facts**********")
     }
 
 
