@@ -151,7 +151,7 @@ class RagPipeline constructor(application: Context) {
         private const val QA_PROMPT_TEMPLATE1: String =
             "You are an intelligent search engine. You will be provided with retrieved context, as well as the users query. Your job is to understand the user query, and answer based on the retrieved context below. Think step by step and answer must be relevant and based on the only the retrieved context. Ensure your answer is logical and uses professional language. Here is the retrieved context -------------------------------------------------- {0} -------------------------------------------------- , i want you to answer User's query {1} <ctrl23>"
         private const val QA_PROMPT_TEMPLATE2: String =
-            "You are an assistant for question-answering tasks. Use the following pieces of retrieved context to answer the question. If you don't know the answer, just say that you don't know. Use three sentences maximum and keep the answer concise.\n Question: {1} \n Context: {0} \n Answer:<ctrl23>"
+            "You are an assistant for question-answering tasks. Use the retrieved context to answer the question. If you don't know the answer, just say that you don't know. Use three sentences maximum and keep the answer concise.\n Question: {1} \n Context: {0} \n Answer:<ctrl23>"
         private var instance: RagPipeline? = null
 
 
